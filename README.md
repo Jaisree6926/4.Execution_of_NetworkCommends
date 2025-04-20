@@ -28,30 +28,44 @@ This commands includes
 • Other IP Commands e.g. show ip route etc.
 <BR>
 
+## program
+## client
+    import socket 
+    from pythonping import ping 
+    s=socket.socket() 
+    s.bind(('localhost'8000)) 
+    s.listen(5) 
+    c,addr=s.accept() 
+    while True: 
+        hostname=c.recv(1024).decode() 
+        try: 
+            c.send(str(ping(hostname, verbose=False)).encode()) 
+        except KeyError: 
+            c.send("Not Found".encode())
+
+## server
+    import socket 
+    s=socket.socket() 
+    s.connect(('localhost',8000)) 
+    while True: 
+        ip=input("Enter the website you want to ping ") 
+        s.send(ip.encode()) 
+        print(s.recv(1024).decode())
 ## Output
-**ping**
+## client
+![322405336-b53ac2f5-24c7-481c-bc98-cf5db18d2510](https://github.com/user-attachments/assets/03516fe8-5697-43d6-b957-79a7d42ae8f4)
+## server
+![322405458-c09a7fe7-d19b-425f-bcd0-db6570c949a2](https://github.com/user-attachments/assets/4012e188-dfbd-40c1-8dec-75c726c4a138)
 
-![ping](https://github.com/user-attachments/assets/dccadb26-673a-41e2-b0b8-eccae241b4a9)
+## TRANCEROUTE COMMAND
+    from scapy.all import* 
+    target = ["www.google.com"] 
+    result, unans = traceroute(target,maxttl=32) 
+    print(result,unans)
 
-**tracert**
 
-![tracert](https://github.com/user-attachments/assets/ed1720eb-2d2e-481f-9da2-95f20efa340a)
+![322405553-2c9ce9c5-56bf-496f-b39c-86176db284ae](https://github.com/user-attachments/assets/64ad2150-cfb0-408d-b02f-61ac7ed34918)
 
-**ipconfig**
-
-![ipconfig](https://github.com/user-attachments/assets/706eb596-9bea-4e84-a078-a23ba4b22a8a)
-
-**ftp**
-
-![ftp](https://github.com/user-attachments/assets/8748d247-07fb-4165-95a4-f0797ab8b077)
-
-**netstat**
-
-![netstat](https://github.com/user-attachments/assets/a554262c-66d8-4ee6-9234-caecaa583c8c)
-
-**nslookup**
-
-![nslookup](https://github.com/user-attachments/assets/7a91d72b-e4d8-465e-b320-8a449a007d70)
 
 ## Result
 Thus Execution of Network commands Performed 
